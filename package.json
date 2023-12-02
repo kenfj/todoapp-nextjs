@@ -5,21 +5,37 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next build && serve out",
+    "mock-backend": "cp mock-backend/db-empty.json /tmp/db$$.json && json-server /tmp/db$$.json --port 8080",
+    "dev-with-mock": "concurrently \"pnpm mock-backend\" \"pnpm dev\"",
+    "start-with-mock": "concurrently \"pnpm mock-backend\" \"pnpm start\"",
+    "test:e2e": "playwright test --workers=1 --project='chromium'",
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "20.4.5",
-    "@types/react": "18.2.17",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12",
-    "next": "13.4.12",
-    "postcss": "8.4.27",
+    "@types/node": "^20.9.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "ag-grid-community": "^30.2.1",
+    "ag-grid-react": "^30.2.1",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "^13.5.6",
+    "ky": "^1.1.3",
+    "next": "^13.5.6",
+    "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "react-hot-toast": "^2.4.1",
+    "swr": "^2.2.4",
+    "tailwindcss": "^3.3.5",
+    "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/json-server": "^0.14.7",
+    "concurrently": "^8.2.2",
+    "json-server": "^0.17.4",
+    "serve": "^14.2.1"
   }
 }

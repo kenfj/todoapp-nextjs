@@ -1,0 +1,10 @@
+{
+    // fix Unknown at rule @tailwind
+    // https://qiita.com/P-man_Brown/items/bf05437afecde268ec15
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "editor.quickSuggestions": {
+        "strings": "on"
+    }
+}
