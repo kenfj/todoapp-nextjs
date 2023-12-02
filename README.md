@@ -1,34 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js SPA with App Router
 
-## Getting Started
+* c.f. https://zenn.dev/hiromu617/articles/1ed6811dc6cf26
 
-First, run the development server:
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# start dev frontend (with Spring Boot backend)
 pnpm dev
+
+# or start dev with mock backend
+pnpm dev-with-mock
+
+# or build and start static frontend with mock backend
+pnpm start-with-mock
+
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dlx create-next-app@latest
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# update next.config.js for SPA
+# output: 'export'
 
-## Learn More
+pnpm run dev
 
-To learn more about Next.js, take a look at the following resources:
+pnpm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# package.json "start" is updated as "serve out" because of this error.
+# Error: "next start" does not work with "output: export" configuration.
+# Use "npx serve@latest out" instead.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+pnpm run start
+# http://localhost:3000
 
-## Deploy on Vercel
+# or using python
+# python -m http.server --directory out 3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Upgrade Packages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+pnpm outdated
+pnpm update --latest
+```
+
+## Mock Backend
+
+* https://github.com/typicode/json-server
+
+```bash
+pnpm mock-backend
+
+curl http://localhost:8080/todos
+```
+
+## E2E Test
+
+* https://playwright.dev/docs/intro
+* https://playwright.dev/docs/getting-started-vscode
+
+```bash
+# add basic setup
+pnpm create playwright
+
+# install browser
+pnpm exec playwright install
+
+# equivalent to pnpm exec playwright test
+pnpm run test:e2e
+
+# other sample commands
+pnpm exec playwright test --ui
+pnpm exec playwright test --project=chromium
+pnpm exec playwright test example
+pnpm exec playwright test --debug
+pnpm exec playwright codegen
+```
+
+## Reference
+
+* https://blog.ag-grid.com/full-row-editing-ag-grid-committing-changes-button-click/
